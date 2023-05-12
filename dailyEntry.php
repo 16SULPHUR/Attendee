@@ -14,10 +14,17 @@
     <?php include 'partials/_header.php';?>
     <?php include 'partials/_connectdb.php';?>
 
+
+
     <div class="container-fluid mt-1  ">
         <div class=" row no-gutters">
             <div class="col-6 col-md-3 border border-secondary bg-dark">
-                <form action="dailyEntry.php" method="post" class="container m-2 my-5">
+
+                <p class="display-6 text-light text-center">
+                    <?php echo date('d/m/y'); ?>
+                </p>
+
+                <form action="dailyEntry.php" method="post" class="container m-2 mb-5">
                     <div class="container">
                         <select name="id" onchange="getid()" id="id" class="form-select"
                             aria-label="Default select example">
@@ -39,7 +46,7 @@
                         } 
                 ?>
                         </select>
-                        <button type="submit" class="mt-5 btn btn-success">Submit</button>
+                        <button type=" submit" class="mt-5 btn btn-success">Submit</button>
                     </div>
                 </form>
             </div>

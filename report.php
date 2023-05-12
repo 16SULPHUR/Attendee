@@ -12,61 +12,47 @@
 
 <body class="bg-dark">
     <?php include 'partials/_header.php';?>
+    <nav class="navbar p-0 bg-body-tertiary">
+        <form class="container-fluid justify-content-end bg-dark pt-3">
+            <a href="?view=card">
+                <button class="btn btn-sm btn-outline-secondary me-3" type="button">Card View</button>
+            </a>
+            <a href="?view=table">
+                <button class="btn btn-sm btn-outline-secondary" type="button">Table View</button>
+            </a>
+        </form>
+    </nav>
     <?php include 'partials/_connectdb.php';?>
-    <div class="container text-center">
-        <div class="row text-start">
+    <?php 
 
-            <?php     
-            $sql = "SELECT * FROM `worker's details`"; 
-            $result = mysqli_query($conn, $sql);
-            // $name = $row['name'];
-            // $gender = $row['gender'];
-            // $rate = $row['rate'];
-            // $advance = $row['advance'];
-            // $days = $row['days'];
-            // $total = $row['total'];
-            // $finaltotal = $row['finaltotal'];
-
-            while($row = mysqli_fetch_assoc($result)){
-                            // echo $row['category_id'];
-                            // echo $row['category_name'];
-                            // $id = $row['id'];
-                            // $name = $row['name'];
-                            // array_push($namearray,$name);
-                            //   $desc = $row['category_description'];
-                            echo '
-                                <div class="col my-3">
-                <div class="card border-success text-success bg-dark" style="width: 18rem;">
-                    <img src="user.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">'.$row['id'].') '.$row['name'].'</h5>
-                    </div>
-                    <ul class="list-group list-group-flush ">
-                        <li class="list-group-item text-success bg-dark">Days: '.$row['days'].'</li>
-                        <li class="list-group-item text-success bg-dark">Total Advance: '.$row['advance'].'</li>
-                        <li class="list-group-item text-success bg-dark">Final Total: '.$row['finaltotal'].'</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">View</a>
-                        <a href="#" class="card-link">Edit</a>
-                    </div>
-                </div>
-            </div>
-
-                            ';
-                            // $i+=1;
-                        } 
+    if(isset($_GET['view'])){
+        $view = $_GET['view'];
+        
+        if($view === 'card'){
+            include 'cardview.php';            
+        }
+        else{
+            include 'tableview.php';             
+        }
+    }
     
-            ?>
+    else{
+        include 'cardview.php'; 
+    }
+    ?>
 
 
-        </div>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-        </script>
+    <script>
+    function openprofile(cardid) {
+        window.location.href = "profile.php?id=" + cardid;
+    }
+    </script>
 </body>
 
 </html>
