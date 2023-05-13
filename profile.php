@@ -76,6 +76,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
+                                    <p class="mb-0">ID</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">'.$id.'</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
                                     <p class="mb-0">Full Name</p>
                                 </div>
                                 <div class="col-sm-9">
@@ -158,7 +167,7 @@
                         </div>
                     </div>
                <!-- <div class="row">
-                        <div class="col-md-6"> 
+                        <div class="col-md-6">  
                             <div class="card mb-4 mb-md-0">
                                 <div class="card-body">
                                     <p class="mb-4"><span class="text-success font-italic me-1">assigment</span> Project

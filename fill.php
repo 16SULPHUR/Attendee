@@ -15,9 +15,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $id = $_POST["id"];
 
     if($id == "Select Worker ID"){
-      echo "<div class=\"alert alert-success m-5\" role=\"alert\">
+      echo '<div class=\"alert alert-success m-5\" role=\"alert\">
   Please select ID!
-</div>";
+</div>';
     }
     else{
       $sql = "SELECT * FROM `worker's details` WHERE `id` = '$id'"; 
@@ -33,6 +33,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         //     $id = $row['id'];
         //     $name = $row['name'];
         echo '<form  action="entrydone.php" method="post"  class="container m-1 bg-dark p-3">
+        <div class="input-group mb-3 w-25">
+  <span class="input-group-text" id="basic-addon1">Date</span>
+  <input class="form-control" type="date" id="birthday" name="date">
+</div>
+        
         <div class="input-group mb-3">
         <span class="input-group-text">ID</span>
         <input type="text" name="id" class="form-control" value="'. $id.'"
@@ -73,24 +78,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 <div class="input-group mb-3">
 <span class="input-group-text">In Time</span>
-<input type="number" value="0" name="intime" id="inimet" class="form-control" aria-label="Username" >
-<span class="input-group-text"><select name ="sm" class="form-select" aria-label="Default select example">
-  <option value="am" selected>am</option>
-  <option value="pm">pm</option>
-</select></span>
+<input class="form-control" id="intime" name="intime" type="time" value = "10:00">
 </div>
 <div class="input-group mb-3 ms-3">
 <span class="input-group-text">Out Time</span>
-<input type="number" value="0" name="outtime" id="outtime" class="form-control" aria-label="Username" >
-<span class="input-group-text"><select name ="em" class="form-select" aria-label="Default select example">
-  <option value="am">am</option>
-  <option value="pm" selected>pm</option>
-</select></span>
+<input class="form-control" id="outtime" name="outtime" type="time" value = "20:00">
 </div>
 </div>
         
-        <button type="submit" class="mt-5 btn btn-success">Submit</button>
-    
+        <div class="d-flex w-100">
+          <button name="submit_form2" type="submit" class="mt-5 me-auto btn btn-success">Submit</button>
+          <a href="#" onclick = "openprofile('.$id.')"><button type="button" class="mt-5 btn btn-success">View Profile</button></a>
+        </div> 
         </form>';
     }
     }
@@ -109,3 +108,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
 ?>
+<script>
+function openprofile(cardid) {
+    window.location.href = "profile.php?id=" + cardid;
+}
+</script>

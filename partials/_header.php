@@ -14,7 +14,7 @@
                     <a class="nav-link" href="dailyEntry.php">Daily Entry</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="report.php">Report</a>
+                    <a class="nav-link" href="report.php">Reports</a>
                 </li>
             </ul>
             <form class=" d-flex" role="search">

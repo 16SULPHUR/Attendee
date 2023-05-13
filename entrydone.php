@@ -16,67 +16,56 @@ $id = $_POST["id"];
     $row = mysqli_fetch_assoc($result);
     $advance = $row['advance'];
     $total = $row['total'];
-$advance += $_POST["advance"];
-$intime = $_POST["intime"];
-$outtime = $_POST["outtime"];
-$sm = $_POST["sm"];
-$em = $_POST["em"];
-$rate = $_POST['rate'];
-$days = $_POST["days"];
-$finaltotal = $_POST["finaltotal"];
+    $advance += $_POST["advance"];
+    $in = $_POST["intime"];
+    $out = $_POST["outtime"];
+    $rate = $_POST['rate'];
+    $days = $_POST["days"];
+    $finaltotal = $_POST["finaltotal"];
 
 
-if($intime == 0 && $outtime == 0 && $advance == 0){
+    $indatetime = DateTime::createFromFormat('H:i' , $in);
+      $outdatetime = DateTime::createFromFormat('H:i' , $out);
+
+      $interval = $indatetime->diff($outdatetime);
+
+      $hours = $interval->h;
+
+      if($interval->i >= 30){
+        $hours += 1;
+      }
+
+
+if($hours == 0){
 echo "<div class=\"alert alert-danger m-5\" role=\"alert\">
     Please fill all fields
 </div>
 <button onclick=\"back()\" class=\"btn btn-success mx-2\" type=\"button\">
     <-- Back</button>";
         }
-        else if(($intime == 0 && $outtime == 0) && $advance != 0){
-            $finaltotal = ($days * $rate) - $advance;
-        $sql = "UPDATE `worker's details` SET  `advance` = '$advance', `finaltotal` = '$finaltotal' WHERE `worker's details`.`id` = '$id'";
-        $result = mysqli_query($conn, $sql);
-        header("Location: dailyEntry.php");
-        }
+else if(($hours == 0) && $advance != 0){
+    $finaltotal = ($days * $rate) - $advance;
+    $sql = "UPDATE `worker's details` SET  `advance` = '$advance', `finaltotal` = '$finaltotal' WHERE `worker's details`.`id` = '$id'";
+    $result = mysqli_query($conn, $sql);
+    header("Location: dailyEntry.php");
+}
+else{
+    $days += 1;
+    $total += $rate;
 
-        else if($sm == "pm"){
-        $intime += 12 ;
-        }
-        else if($em == "pm"){
-        $outtime += 12;
-        }
-        $hours = $outtime - $intime;
+    $finaltotal = ($days * $rate) - $advance;
 
-        if($hours >= 12){
-        $hours -= 12;
-        }
-        else if($hours <= 0){ echo "<div class=\" alert alert-danger m-5\" role=\"alert\">
-            Please enter valid In time and Out time
-            </div>
-            <button onclick=\"back()\" class=\"btn btn-success mx-2\" type=\"button\">
-                <-- Back</button>";
-                    }
-                    else{
-                    $days += 1;
-                    $total += $rate;
+    $sql = "UPDATE `worker's details` SET`hours` = '$hours', `days` = '$days', `advance` = '$advance',
+            `total` = '$total', `finaltotal` = '$finaltotal' WHERE `worker's details`.`id` = $id";
+    $result = mysqli_query($conn, $sql);
 
-                    $finaltotal = ($days * $rate) - $advance;
-
-                    $sql = "UPDATE `worker's details` SET`hours` = '$hours', `days` = '$days', `advance` = '$advance',
-                    `total` = '$total', `finaltotal` = '$finaltotal' WHERE `worker's details`.`id` = $id";
-                    $result = mysqli_query($conn, $sql);
-
-                    header("Location: dailyEntry.php");
-                    }
-
-
-
-                    echo $sm;
-                    echo $em;
-                    echo $hours;
-                    }
+    header("Location: dailyEntry.php");       
+    }
+                    
+}
+                    
                     ?>
+
 
 <script>
 function back() {
